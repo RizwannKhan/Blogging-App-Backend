@@ -49,7 +49,6 @@ public class PostController {
 			@PathVariable Integer categoryId) {
 
 		PostDto post = this.postService.createPost(dto, userId, categoryId);
-
 		return new ResponseEntity<PostDto>(post, HttpStatus.CREATED);
 	}
 
@@ -91,9 +90,9 @@ public class PostController {
 
 	// delete post
 	@DeleteMapping("/posts/{postId}")
-	public ResponseEntity<PostDto> deletePost(@PathVariable Integer postId) {
+	public ResponseEntity<ApiResponse> deletePost(@PathVariable Integer postId) {
 		this.postService.deletePost(postId);
-		return new ResponseEntity(new ApiResponse("Post is Deleted successfully !!", true), HttpStatus.OK);
+		return new ResponseEntity<ApiResponse>(new ApiResponse("Post is Deleted successfully !!", true), HttpStatus.OK);
 	}
 
 	// update post
@@ -119,7 +118,6 @@ public class PostController {
 		String fileName = this.fileService.uploadImage(path, image);
 		postDto.setImageName(fileName);
 		PostDto updatedPost = this.postService.updatePost(postDto, postId);
-
 		return new ResponseEntity<PostDto>(updatedPost, HttpStatus.OK);
 	}
 

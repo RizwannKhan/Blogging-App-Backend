@@ -1,5 +1,6 @@
 package com.blog.apis.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,8 +26,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Post {
-	
+public class Post implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer postId;

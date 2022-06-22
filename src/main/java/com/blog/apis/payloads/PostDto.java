@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.blog.apis.entities.Comment;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
