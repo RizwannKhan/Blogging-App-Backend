@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.blog.apis.exceptions.InvalidUserDetailsException;
 import com.blog.apis.payloads.JwtAuthRequest;
 import com.blog.apis.payloads.JwtAuthResponse;
+import com.blog.apis.payloads.UserDto;
 import com.blog.apis.security.JwtTokenHelper;
+import com.blog.apis.services.UserService;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -30,6 +32,9 @@ public class AuthController {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
+
+	@Autowired
+	private UserService userService;
 
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest authRequest)
@@ -54,6 +59,13 @@ public class AuthController {
 			System.err.println("Invalid Details !!!");
 			throw new InvalidUserDetailsException("User", "Username or Password");
 		}
+	}
+
+	// Register new user api
+	@PostMapping("/register")
+	public ResponseEntity<UserDto> registerUser(@RequestBody UserDto dto) {
+		UserDto registeredUser = this.userService.registerUser(dto);
+		return new ResponseEntity<UserDto>(registeredUser, HttpStatus.CREATED);
 	}
 
 }
